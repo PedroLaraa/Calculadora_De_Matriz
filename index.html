@@ -203,9 +203,8 @@
         for (let j = 0; j < matrizB[0].length; j++) { // LOOP PARA ITERAR LINHA A LINHA
           let soma = 0;
           for (let k = 0; k < matrizB.length; k++) { // LOOP PARA FAZER A MULTIPLICAÇÃO DOS ELEMENTOS
-            soma += matrizA[i][k] * matrizB[k][j]; // FAZ A MULTIPLICAÇÃO DA LINHA[ELEMENTO] X LINHA[ELEMENTO]
+            resultado[i].push(matrizA[i][k] * matrizB[k][j]); // FAZ A MULTIPLICAÇÃO DA LINHA[ELEMENTO] X LINHA[ELEMENTO]
           }
-          resultado[i].push(soma); // COLOCA O VALOR OBTIDO NA OPERAÇÃO DENTRO DA ARRAY
         }
       }
 
