@@ -100,12 +100,13 @@
     }
 
     function somarMatrizes() {
+      // CONVERTE OS VALORES PARA AS ARRAYS
       const matrizA = MostrarMatriz(document.getElementById('matrizA').value);
       const matrizB = MostrarMatriz(document.getElementById('matrizB').value);
 
       console.log(matrizA)
 
-      if (matrizA.length == 1 && matrizA[0].length == 1 || matrizB.length == 1 && matrizB[0].length == 1) {
+      if (matrizA.length == 1 && matrizA[0].length == 1 || matrizB.length == 1 && matrizB[0].length == 1) { // VERIFICA TAMANHO DAS MATRIZES
 
         if (matrizA[0].length == 1) {
           alert('Matriz A precisa ser mais que um elemento!');
@@ -119,28 +120,29 @@
       }
       else {
 
-        if (matrizA.length !== matrizB.length || matrizA[0].length !== matrizB[0].length) {
+        if (matrizA.length !== matrizB.length || matrizA[0].length !== matrizB[0].length) { // VERIFICA SE AS MATRIZES TEM A MESMA DIMENSÃO
           alert('As matrizes precisam ter a mesma dimensão!' + matrizA[0].length);
           return;
         }
 
         const resultado = [];
-        for (let i = 0; i < matrizA.length; i++) {
-          resultado.push([]);
-          for (let j = 0; j < matrizA[0].length; j++) {
-            resultado[i].push(matrizA[i][j] + matrizB[i][j]);
+        for (let i = 0; i < matrizA.length; i++) { // LOOP PARA ITERAR LINHA A LINHA
+          resultado.push([]); 
+          for (let j = 0; j < matrizA[0].length; j++) { // LOOP PARA FAZER A ADIÇÃO DOS ELEMENTOS
+            resultado[i].push(matrizA[i][j] + matrizB[i][j]); // FAZ A SUBTRAÇÃO DA LINHA[ELEMENTO] + LINHA[ELEMENTO]
           }
         }
 
-        exibirMatriz(resultado);
+        exibirMatriz(resultado); // TRANSFORMA O RESULTADO DE ARRAY EM UMA MATRIZ
       }
     }
 
     function subtrairMatrizes() {
+      // CONVERTE OS VALORES PARA AS ARRAYS
       const matrizA = MostrarMatriz(document.getElementById('matrizA').value);
       const matrizB = MostrarMatriz(document.getElementById('matrizB').value);
 
-      if (matrizA.length == 1 && matrizA[0].length == 1 || matrizB.length == 1 && matrizB[0].length == 1) {
+      if (matrizA.length == 1 && matrizA[0].length == 1 || matrizB.length == 1 && matrizB[0].length == 1) { // VERIFICA TAMANHO DAS MATRIZES
 
         if (matrizA[0].length == 1) {
           alert('Matriz A precisa ser mais que um elemento!');
@@ -154,20 +156,20 @@
       }
       else {
 
-        if (matrizA.length !== matrizB.length || matrizA[0].length !== matrizB[0].length) {
+        if (matrizA.length !== matrizB.length || matrizA[0].length !== matrizB[0].length) { // VERIFICA SE AS MATRIZES TEM A MESMA DIMENSÃO
           alert('As matrizes precisam ter a mesma dimensão!');
           return;
         }
 
         const resultado = [];
-        for (let i = 0; i < matrizA.length; i++) {
+        for (let i = 0; i < matrizA.length; i++) { // LOOP PARA ITERAR LINHA A LINHA
           resultado.push([]);
-          for (let j = 0; j < matrizA[0].length; j++) {
-            resultado[i].push(matrizA[i][j] - matrizB[i][j]);
+          for (let j = 0; j < matrizA[0].length; j++) { // LOOP PARA FAZER A SUBTRAÇÃO DOS ELEMENTOS
+            resultado[i].push(matrizA[i][j] - matrizB[i][j]); // FAZ A SUBTRAÇÃO DA LINHA[ELEMENTO] - LINHA[ELEMENTO]
           }
         }
 
-        exibirMatriz(resultado);
+        exibirMatriz(resultado); // TRANSFORMA O RESULTADO DE ARRAY EM UMA MATRIZ
       }
     }
 
@@ -175,7 +177,7 @@
       const matrizA = MostrarMatriz(document.getElementById('matrizA').value);
       const matrizB = MostrarMatriz(document.getElementById('matrizB').value);
 
-      if (matrizA.length == 1 && matrizA[0].length == 1 || matrizB.length == 1 && matrizB[0].length == 1) {
+      if (matrizA.length == 1 && matrizA[0].length == 1 || matrizB.length == 1 && matrizB[0].length == 1) { // VERIFICA TAMANHO DAS MATRIZES
 
         if (matrizA[0].length == 1) {
           alert('Matriz A precisa ser mais que um elemento!');
@@ -189,8 +191,7 @@
       }
       else {
 
-
-        if (matrizA[0].length !== matrizB.length) {
+        if (matrizA[0].length !== matrizB.length) { // VERIFICA SE AS MATRIZES TEM A MESMA DIMENSÃO
           alert('O número de colunas da matriz A deve ser igual ao número de linhas da matriz B!');
           return;
         }
@@ -198,16 +199,16 @@
         const resultado = [];
         for (let i = 0; i < matrizA.length; i++) {
           resultado.push([]);
-          for (let j = 0; j < matrizB[0].length; j++) {
+          for (let j = 0; j < matrizB[0].length; j++) { // LOOP PARA ITERAR LINHA A LINHA
             let soma = 0;
-            for (let k = 0; k < matrizB.length; k++) {
-              soma += matrizA[i][k] * matrizB[k][j];
+            for (let k = 0; k < matrizB.length; k++) { // LOOP PARA FAZER A MULTIPLICAÇÃO DOS ELEMENTOS
+              soma += matrizA[i][k] * matrizB[k][j]; // FAZ A MULTIPLICAÇÃO DA LINHA[ELEMENTO] X LINHA[ELEMENTO]
             }
-            resultado[i].push(soma);
+            resultado[i].push(soma); // COLOCA O VALOR OBTIDO NA OPERAÇÃO DENTRO DA ARRAY
           }
         }
 
-        exibirMatriz(resultado);
+        exibirMatriz(resultado); // TRANSFORMA O RESULTADO DE ARRAY EM UMA MATRIZ
       }
     }
 
