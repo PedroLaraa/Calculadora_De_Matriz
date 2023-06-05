@@ -22,6 +22,10 @@
 
 <head>
 
+  <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
   <title>Calculador de Matriz</title>
 
 </head>
@@ -75,7 +79,6 @@
 
           <div id="resultado">
 
-
           </div>
         </center>
       </div>
@@ -87,160 +90,160 @@
 
 <script>
 
-    function MostrarMatriz(inputText) {
-      const linhasTexto = inputText.trim().split('\n'); // TRANSFORMA O INPUT DO TEXTAREA EM UMA ARRAY
+  function MostrarMatriz(inputText) {
+    const linhasTexto = inputText.trim().split('\n'); // TRANSFORMA O INPUT DO TEXTAREA EM UMA ARRAY
 
-      const matriz = linhasTexto.map(linha => {
-        return linha.trim().split(/\s+/).map(v => {
-          return parseFloat(v); // RETORNA OS VALORES DA LINHA
-        });
+    const matriz = linhasTexto.map(linha => {
+      return linha.trim().split(/\s+/).map(v => {
+        return parseFloat(v); // RETORNA OS VALORES DA LINHA
+      });
+    });
+
+    return matriz;
+  }
+
+  function somarMatrizes() {
+    // CONVERTE OS VALORES PARA AS ARRAYS
+    const matrizA = MostrarMatriz(document.getElementById('matrizA').value);
+    const matrizB = MostrarMatriz(document.getElementById('matrizB').value);
+
+    console.log(matrizA)
+
+    if (matrizA.length == 1 && matrizA[0].length == 1 || matrizB.length == 1 && matrizB[0].length == 1) { // VERIFICA TAMANHO DAS MATRIZES
+
+      if (matrizA[0].length == 1) {
+        alert('Matriz A precisa ser mais que um elemento!');
+        return;
+      }
+      else if (matrizB[0].length == 1) {
+        alert('Matriz B precisa ser mais que um elemento!');
+        return;
+      }
+
+    }
+    else {
+
+      if (matrizA.length !== matrizB.length || matrizA[0].length !== matrizB[0].length) { // VERIFICA SE AS MATRIZES TEM A MESMA DIMENSÃO
+        alert('As matrizes precisam ter a mesma dimensão!' + matrizA[0].length);
+        return;
+      }
+
+      const resultado = [];
+      for (let i = 0; i < matrizA.length; i++) { // LOOP PARA ITERAR LINHA A LINHA
+        resultado.push([]);
+        for (let j = 0; j < matrizA[0].length; j++) { // LOOP PARA FAZER A ADIÇÃO DOS ELEMENTOS
+          resultado[i].push(matrizA[i][j] + matrizB[i][j]); // FAZ A SUBTRAÇÃO DA LINHA[ELEMENTO] + LINHA[ELEMENTO]
+        }
+      }
+
+      exibirMatriz(resultado); // TRANSFORMA O RESULTADO DE ARRAY EM UMA MATRIZ
+    }
+  }
+
+  function subtrairMatrizes() {
+    // CONVERTE OS VALORES PARA AS ARRAYS
+    const matrizA = MostrarMatriz(document.getElementById('matrizA').value);
+    const matrizB = MostrarMatriz(document.getElementById('matrizB').value);
+
+    if (matrizA.length == 1 && matrizA[0].length == 1 || matrizB.length == 1 && matrizB[0].length == 1) { // VERIFICA TAMANHO DAS MATRIZES
+
+      if (matrizA[0].length == 1) {
+        alert('Matriz A precisa ser mais que um elemento!');
+        return;
+      }
+      else if (matrizB[0].length == 1) {
+        alert('Matriz B precisa ser mais que um elemento!');
+        return;
+      }
+
+    }
+    else {
+
+      if (matrizA.length !== matrizB.length || matrizA[0].length !== matrizB[0].length) { // VERIFICA SE AS MATRIZES TEM A MESMA DIMENSÃO
+        alert('As matrizes precisam ter a mesma dimensão!');
+        return;
+      }
+
+      const resultado = [];
+      for (let i = 0; i < matrizA.length; i++) { // LOOP PARA ITERAR LINHA A LINHA
+        resultado.push([]);
+        for (let j = 0; j < matrizA[0].length; j++) { // LOOP PARA FAZER A SUBTRAÇÃO DOS ELEMENTOS
+          resultado[i].push(matrizA[i][j] - matrizB[i][j]); // FAZ A SUBTRAÇÃO DA LINHA[ELEMENTO] - LINHA[ELEMENTO]
+        }
+      }
+
+      exibirMatriz(resultado); // TRANSFORMA O RESULTADO DE ARRAY EM UMA MATRIZ
+    }
+  }
+
+  function multiplicarMatrizes() {
+    const matrizA = MostrarMatriz(document.getElementById('matrizA').value);
+    const matrizB = MostrarMatriz(document.getElementById('matrizB').value);
+
+    if (matrizA.length == 1 && matrizA[0].length == 1 || matrizB.length == 1 && matrizB[0].length == 1) { // VERIFICA TAMANHO DAS MATRIZES
+
+      if (matrizA[0].length == 1) {
+        alert('Matriz A precisa ser mais que um elemento!');
+        return;
+      }
+      else if (matrizB[0].length == 1) {
+        alert('Matriz B precisa ser mais que um elemento!');
+        return;
+      }
+
+    }
+    else {
+
+      if (matrizA[0].length !== matrizB.length) { // VERIFICA SE AS MATRIZES TEM A MESMA DIMENSÃO
+        alert('O número de colunas da matriz A deve ser igual ao número de linhas da matriz B!');
+        return;
+      }
+
+      const resultado = [];
+      for (let i = 0; i < matrizA.length; i++) {
+        resultado.push([]);
+        for (let j = 0; j < matrizB[0].length; j++) { // LOOP PARA ITERAR LINHA A LINHA
+          let soma = 0;
+          for (let k = 0; k < matrizB.length; k++) { // LOOP PARA FAZER A MULTIPLICAÇÃO DOS ELEMENTOS
+            soma += matrizA[i][k] * matrizB[k][j]; // FAZ A MULTIPLICAÇÃO DA LINHA[ELEMENTO] X LINHA[ELEMENTO]
+          }
+          resultado[i].push(soma); // COLOCA O VALOR OBTIDO NA OPERAÇÃO DENTRO DA ARRAY
+        }
+      }
+
+      exibirMatriz(resultado); // TRANSFORMA O RESULTADO DE ARRAY EM UMA MATRIZ
+    }
+  }
+
+  function exibirMatriz(matriz) {
+    const resultadoDiv = document.getElementById('resultado'); // ELEMENTO HTML RESPONSÁVEL POR EXIBIR A MATRIZ CALCULADA
+
+    resultadoDiv.innerHTML = '';
+
+    const tbl = document.createElement('table');
+    tbl.style.width = '50px';
+    tbl.style.border = '1px solid black';
+
+    matriz.forEach(linha => {
+      const tr = document.createElement('tr');
+
+      linha.forEach(valor => { // COLOCA OS RESULTADOS DA OPERAÇÃO EM CADA LINHA
+        const td = document.createElement('td');
+        td.textContent = valor;
+        tr.appendChild(td);
       });
 
-      return matriz;
-    }
 
-    function somarMatrizes() {
-      // CONVERTE OS VALORES PARA AS ARRAYS
-      const matrizA = MostrarMatriz(document.getElementById('matrizA').value);
-      const matrizB = MostrarMatriz(document.getElementById('matrizB').value);
+      tbl.appendChild(tr);
+    });
 
-      console.log(matrizA)
-
-      if (matrizA.length == 1 && matrizA[0].length == 1 || matrizB.length == 1 && matrizB[0].length == 1) { // VERIFICA TAMANHO DAS MATRIZES
-
-        if (matrizA[0].length == 1) {
-          alert('Matriz A precisa ser mais que um elemento!');
-          return;
-        }
-        else if (matrizB[0].length == 1) {
-          alert('Matriz B precisa ser mais que um elemento!');
-          return;
-        }
-
-      }
-      else {
-
-        if (matrizA.length !== matrizB.length || matrizA[0].length !== matrizB[0].length) { // VERIFICA SE AS MATRIZES TEM A MESMA DIMENSÃO
-          alert('As matrizes precisam ter a mesma dimensão!' + matrizA[0].length);
-          return;
-        }
-
-        const resultado = [];
-        for (let i = 0; i < matrizA.length; i++) { // LOOP PARA ITERAR LINHA A LINHA
-          resultado.push([]); 
-          for (let j = 0; j < matrizA[0].length; j++) { // LOOP PARA FAZER A ADIÇÃO DOS ELEMENTOS
-            resultado[i].push(matrizA[i][j] + matrizB[i][j]); // FAZ A SUBTRAÇÃO DA LINHA[ELEMENTO] + LINHA[ELEMENTO]
-          }
-        }
-
-        exibirMatriz(resultado); // TRANSFORMA O RESULTADO DE ARRAY EM UMA MATRIZ
-      }
-    }
-
-    function subtrairMatrizes() {
-      // CONVERTE OS VALORES PARA AS ARRAYS
-      const matrizA = MostrarMatriz(document.getElementById('matrizA').value);
-      const matrizB = MostrarMatriz(document.getElementById('matrizB').value);
-
-      if (matrizA.length == 1 && matrizA[0].length == 1 || matrizB.length == 1 && matrizB[0].length == 1) { // VERIFICA TAMANHO DAS MATRIZES
-
-        if (matrizA[0].length == 1) {
-          alert('Matriz A precisa ser mais que um elemento!');
-          return;
-        }
-        else if (matrizB[0].length == 1) {
-          alert('Matriz B precisa ser mais que um elemento!');
-          return;
-        }
-
-      }
-      else {
-
-        if (matrizA.length !== matrizB.length || matrizA[0].length !== matrizB[0].length) { // VERIFICA SE AS MATRIZES TEM A MESMA DIMENSÃO
-          alert('As matrizes precisam ter a mesma dimensão!');
-          return;
-        }
-
-        const resultado = [];
-        for (let i = 0; i < matrizA.length; i++) { // LOOP PARA ITERAR LINHA A LINHA
-          resultado.push([]);
-          for (let j = 0; j < matrizA[0].length; j++) { // LOOP PARA FAZER A SUBTRAÇÃO DOS ELEMENTOS
-            resultado[i].push(matrizA[i][j] - matrizB[i][j]); // FAZ A SUBTRAÇÃO DA LINHA[ELEMENTO] - LINHA[ELEMENTO]
-          }
-        }
-
-        exibirMatriz(resultado); // TRANSFORMA O RESULTADO DE ARRAY EM UMA MATRIZ
-      }
-    }
-
-    function multiplicarMatrizes() {
-      const matrizA = MostrarMatriz(document.getElementById('matrizA').value);
-      const matrizB = MostrarMatriz(document.getElementById('matrizB').value);
-
-      if (matrizA.length == 1 && matrizA[0].length == 1 || matrizB.length == 1 && matrizB[0].length == 1) { // VERIFICA TAMANHO DAS MATRIZES
-
-        if (matrizA[0].length == 1) {
-          alert('Matriz A precisa ser mais que um elemento!');
-          return;
-        }
-        else if (matrizB[0].length == 1) {
-          alert('Matriz B precisa ser mais que um elemento!');
-          return;
-        }
-
-      }
-      else {
-
-        if (matrizA[0].length !== matrizB.length) { // VERIFICA SE AS MATRIZES TEM A MESMA DIMENSÃO
-          alert('O número de colunas da matriz A deve ser igual ao número de linhas da matriz B!');
-          return;
-        }
-
-        const resultado = [];
-        for (let i = 0; i < matrizA.length; i++) {
-          resultado.push([]);
-          for (let j = 0; j < matrizB[0].length; j++) { // LOOP PARA ITERAR LINHA A LINHA
-            let soma = 0;
-            for (let k = 0; k < matrizB.length; k++) { // LOOP PARA FAZER A MULTIPLICAÇÃO DOS ELEMENTOS
-              soma += matrizA[i][k] * matrizB[k][j]; // FAZ A MULTIPLICAÇÃO DA LINHA[ELEMENTO] X LINHA[ELEMENTO]
-            }
-            resultado[i].push(soma); // COLOCA O VALOR OBTIDO NA OPERAÇÃO DENTRO DA ARRAY
-          }
-        }
-
-        exibirMatriz(resultado); // TRANSFORMA O RESULTADO DE ARRAY EM UMA MATRIZ
-      }
-    }
-
-    function exibirMatriz(matriz) {
-      const resultadoDiv = document.getElementById('resultado'); // ELEMENTO HTML RESPONSÁVEL POR EXIBIR A MATRIZ CALCULADA
-
-      resultadoDiv.innerHTML = '';
-
-      const tbl = document.createElement('table');
-      tbl.style.width = '50px';
-      tbl.style.border = '1px solid black';
-
-      matriz.forEach(linha => {
-        const tr = document.createElement('tr');
-
-        linha.forEach(valor => { // COLOCA OS RESULTADOS DA OPERAÇÃO EM CADA LINHA
-          const td = document.createElement('td');
-          td.textContent = valor;
-          tr.appendChild(td);
-        });
+    resultadoDiv.appendChild(tbl); // BUSCA OS VALORES E EXIBE
 
 
-        tbl.appendChild(tr);
-      });
-
-      resultadoDiv.appendChild(tbl); // BUSCA OS VALORES E EXIBE
+  }
 
 
-    }
-
-
-  </script>
+</script>
 
 
 </html>
