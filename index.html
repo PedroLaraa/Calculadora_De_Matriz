@@ -68,7 +68,7 @@
         <center>
           <button class="btn btn-primary" onclick="somarMatrizes()">Somar</button>
           <button class="btn btn-secondary" onclick="subtrairMatrizes()">Subtrair</button>
-          <button class="btn btn-success" onclick="multiplicarMatrizes()">Multiplicar</button>
+          <button class="btn btn-success" onclick="multiplicarMatrizes('*')">Multiplicar</button>
         </center>
       </div>
 
@@ -174,7 +174,7 @@
     }
   }
 
-  function multiplicarMatrizes() {
+  function multiplicarMatrizes(operador) {
     const matrizA = MostrarMatriz(document.getElementById('matrizA').value);
     const matrizB = MostrarMatriz(document.getElementById('matrizB').value);
 
@@ -192,23 +192,18 @@
     }
     else {
 
-      if (matrizA[0].length !== matrizB.length) { // VERIFICA SE AS MATRIZES TEM A MESMA DIMENSÃO
-        alert('O número de colunas da matriz A deve ser igual ao número de linhas da matriz B!');
+      if (matrizA.length !== matrizB.length || matrizA[0].length !== matrizB[0].length) { // VERIFICA SE AS MATRIZES TEM A MESMA DIMENSÃO
+        alert('As matrizes precisam ter a mesma dimensão!');
         return;
       }
 
       const resultado = [];
-      for (let i = 0; i < matrizA.length; i++) {
+      for (let i = 0; i < matrizA.length; i++) { // LOOP PARA ITERAR LINHA A LINHA
         resultado.push([]);
-        for (let j = 0; j < matrizB[0].length; j++) { // LOOP PARA ITERAR LINHA A LINHA
-          let soma = 0;
-          for (let k = 0; k < matrizB.length; k++) { // LOOP PARA FAZER A MULTIPLICAÇÃO DOS ELEMENTOS
-            resultado[i].push(matrizA[i][k] * matrizB[k][j]); // FAZ A MULTIPLICAÇÃO DA LINHA[ELEMENTO] X LINHA[ELEMENTO]
-          }
+        for (let j = 0; j < matrizA[0].length; j++) { // LOOP PARA FAZER A SUBTRAÇÃO DOS ELEMENTOS
+          resultado[i].push(matrizA[i][j] * matrizB[i][j]); // FAZ A SUBTRAÇÃO DA LINHA[ELEMENTO] - LINHA[ELEMENTO]
         }
       }
-
-      exibirMatriz(resultado); // TRANSFORMA O RESULTADO DE ARRAY EM UMA MATRIZ
     }
   }
 
@@ -230,15 +225,12 @@
         tr.appendChild(td);
       });
 
-
       tbl.appendChild(tr);
     });
 
     resultadoDiv.appendChild(tbl); // BUSCA OS VALORES E EXIBE
 
-
   }
-
 
 </script>
 
