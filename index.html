@@ -103,6 +103,8 @@
       const matrizA = MostrarMatriz(document.getElementById('matrizA').value);
       const matrizB = MostrarMatriz(document.getElementById('matrizB').value);
 
+      console.log(matrizA)
+
       if (matrizA.length == 1 && matrizA[0].length == 1 || matrizB.length == 1 && matrizB[0].length == 1) {
 
         if (matrizA[0].length == 1) {
@@ -210,7 +212,7 @@
     }
 
     function exibirMatriz(matriz) {
-      const resultadoDiv = document.getElementById('resultado');
+      const resultadoDiv = document.getElementById('resultado'); // ELEMENTO HTML RESPONSÁVEL POR EXIBIR A MATRIZ CALCULADA
 
       resultadoDiv.innerHTML = '';
 
@@ -221,7 +223,7 @@
       matriz.forEach(linha => {
         const tr = document.createElement('tr');
 
-        linha.forEach(valor => {
+        linha.forEach(valor => { // COLOCA OS RESULTADOS DA OPERAÇÃO EM CADA LINHA
           const td = document.createElement('td');
           td.textContent = valor;
           tr.appendChild(td);
@@ -231,7 +233,7 @@
         tbl.appendChild(tr);
       });
 
-      resultadoDiv.appendChild(tbl);
+      resultadoDiv.appendChild(tbl); // BUSCA OS VALORES E EXIBE
 
 
     }
